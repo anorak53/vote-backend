@@ -1,0 +1,44 @@
+type VoteList {
+  id: Int!
+  name: String!
+  details: String!
+  logoUrl: String!
+  Score: Int!
+}
+
+type Result {
+  success: Boolean!
+}
+
+type Query {
+  VoteList: [VoteList!]!
+}
+
+input VoteSelect {
+  id: Int!
+  ID_CARD_NUMBER: Int!
+  STUDENT_NUMBER: Int!
+}
+
+input CreateVote {
+  name: String!
+  details: String!
+  logoUrl: String!
+}
+
+input EditVote {
+  name: String!
+  details: String!
+  logoUrl: String!
+}
+
+input DeleteVote {
+  id: Int!
+}
+
+type Mutation {
+  voteSelect(input: VoteSelect!): Result!
+  CreateVote(input: CreateVote!): Result!
+  EditVote(input: EditVote!): Result!
+  DeleteVote(input: DeleteVote!): Result!
+}
