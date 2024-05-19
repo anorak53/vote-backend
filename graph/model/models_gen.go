@@ -4,6 +4,7 @@ package model
 
 type CreateVote struct {
 	Name    string `json:"name"`
+	Number  int    `json:"number"`
 	Details string `json:"details"`
 	LogoURL string `json:"logoUrl"`
 }
@@ -14,6 +15,7 @@ type DeleteVote struct {
 
 type EditVote struct {
 	Name    string `json:"name"`
+	Number  int    `json:"number"`
 	Details string `json:"details"`
 	LogoURL string `json:"logoUrl"`
 }

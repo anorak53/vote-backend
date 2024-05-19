@@ -2957,7 +2957,7 @@ func (ec *executionContext) unmarshalInputCreateVote(ctx context.Context, obj in
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "details", "logoUrl"}
+	fieldsInOrder := [...]string{"name", "number", "details", "logoUrl"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -2971,6 +2971,13 @@ func (ec *executionContext) unmarshalInputCreateVote(ctx context.Context, obj in
 				return it, err
 			}
 			it.Name = data
+		case "number":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("number"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Number = data
 		case "details":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("details"))
 			data, err := ec.unmarshalNString2string(ctx, v)
@@ -3025,7 +3032,7 @@ func (ec *executionContext) unmarshalInputEditVote(ctx context.Context, obj inte
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "details", "logoUrl"}
+	fieldsInOrder := [...]string{"name", "number", "details", "logoUrl"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -3039,6 +3046,13 @@ func (ec *executionContext) unmarshalInputEditVote(ctx context.Context, obj inte
 				return it, err
 			}
 			it.Name = data
+		case "number":
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("number"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Number = data
 		case "details":
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("details"))
 			data, err := ec.unmarshalNString2string(ctx, v)

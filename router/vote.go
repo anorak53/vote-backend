@@ -107,6 +107,7 @@ func CreateVote(ctx context.Context, input model.CreateVote) (*model.Result, err
 	dsn := db.GetGormDB()
 	vote := db.Vote{
 		Name:    input.Name,
+		Number:  int64(input.Number),
 		Details: input.Details,
 		LogoUrl: input.LogoURL,
 		Score:   0,

@@ -23,12 +23,14 @@ input VoteSelect {
 
 input CreateVote {
   name: String!
+  number: Int!
   details: String!
   logoUrl: String!
 }
 
 input EditVote {
   name: String!
+  number: Int!
   details: String!
   logoUrl: String!
 }
