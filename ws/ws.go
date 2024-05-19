@@ -56,6 +56,7 @@ func VoteList(ctx context.Context) ([]*model.VoteList, error) {
 		modelVote := &model.VoteList{
 			ID:      int(dbVote.ID),
 			Name:    dbVote.Name,
+			Number:  int(dbVote.Number),
 			Details: dbVote.Details,
 			LogoURL: dbVote.LogoUrl,
 			Score:   int(dbVote.Score),

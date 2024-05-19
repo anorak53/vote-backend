@@ -92,8 +92,10 @@ func VoteList(ctx context.Context) ([]*model.VoteList, error) {
 		modelVote := &model.VoteList{ // Create a pointer to the struct
 			ID:      int(vote.ID),
 			Name:    vote.Name,
+			Number:  int(vote.Number),
 			Details: vote.Details,
 			LogoURL: vote.LogoUrl,
+			Score:   int(vote.Score),
 		}
 		modelVoteList = append(modelVoteList, modelVote)
 	}

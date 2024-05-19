@@ -31,6 +31,7 @@ type Result struct {
 type VoteList struct {
 	ID      int    `json:"id"`
 	Name    string `json:"name"`
+	Number  int    `json:"number"`
 	Details string `json:"details"`
 	LogoURL string `json:"logoUrl"`
 	Score   int    `json:"Score"`

@@ -67,6 +67,7 @@ type ComplexityRoot struct {
 		ID      func(childComplexity int) int
 		LogoURL func(childComplexity int) int
 		Name    func(childComplexity int) int
+		Number  func(childComplexity int) int
 		Score   func(childComplexity int) int
 	}
 }
@@ -189,6 +190,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.VoteList.Name(childComplexity), true
+
+	case "VoteList.number":
+		if e.complexity.VoteList.Number == nil {
+			break
+		}
+
+		return e.complexity.VoteList.Number(childComplexity), true
 
 	case "VoteList.Score":
 		if e.complexity.VoteList.Score == nil {
@@ -717,6 +725,8 @@ func (ec *executionContext) fieldContext_Query_VoteList(_ context.Context, field
 				return ec.fieldContext_VoteList_id(ctx, field)
 			case "name":
 				return ec.fieldContext_VoteList_name(ctx, field)
+			case "number":
+				return ec.fieldContext_VoteList_number(ctx, field)
 			case "details":
 				return ec.fieldContext_VoteList_details(ctx, field)
 			case "logoUrl":
@@ -986,6 +996,50 @@ func (ec *executionContext) fieldContext_VoteList_name(_ context.Context, field 
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _VoteList_number(ctx context.Context, field graphql.CollectedField, obj *model.VoteList) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_VoteList_number(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Number, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_VoteList_number(_ context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "VoteList",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
 		},
 	}
 	return fc, nil
@@ -3253,6 +3307,11 @@ func (ec *executionContext) _VoteList(ctx context.Context, sel ast.SelectionSet,
 			}
 		case "name":
 			out.Values[i] = ec._VoteList_name(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "number":
+			out.Values[i] = ec._VoteList_number(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}

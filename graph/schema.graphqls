@@ -1,6 +1,7 @@
 type VoteList {
   id: Int!
   name: String!
+  number: Int!
   details: String!
   logoUrl: String!
   Score: Int!
