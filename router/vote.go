@@ -130,6 +130,7 @@ func EditVote(ctx context.Context, input model.EditVote) (*model.Result, error) 
 	dsn := db.GetGormDB()
 	vote := db.Vote{
 		Name:    input.Name,
+		Number:  int64(input.Number),
 		Details: input.Details,
 		LogoUrl: input.LogoURL,
 	}
