@@ -13,7 +13,7 @@ func VoteSelect(ctx context.Context, input model.VoteSelect) (*model.Result, err
 	dsn := db.GetGormDB()
 	var user db.User
 	var vote db.Vote
-	err := dsn.First(&user, db.User{ID_CARD_NUMBER: int64(input.IDCardNumber), STUDENT_NUMBER: int64(input.StudentNumber)})
+	err := dsn.First(&user, db.User{STUDENT_NUMBER: int64(input.StudentNumber)})
 	if err.Error != nil {
 		// Handle error if user not found
 		errList := &gqlerror.Error{
